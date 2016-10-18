@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grillber</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid">
+    <div class="row navbar" id="navbar">
+      <div class="col-sm-12 col-md-12 col-lg-12 rightnav">
+        <i class="fa fa-bars" id="fa-bars" aria-hidden="true"></i>
+      <ul class="scroll" id="nav">
+        <li class="navbar-link"><a href="#home">Home</a></li>
+        <li class="navbar-link"><a href="#about" id="backtoabout">About</a></li>
+        <li class="navbar-link"><a href="#products" id="backtoproducts">Product</a></li>
+        <li class="navbar-link"><a href="#meetteam" id="backtocontacts">Meet the Team</a></li>
+      </ul>
+      </div>
+      </div>
+        {% block body %}
+        {% endblock %}
+
+    </div>
+  </body>
+</html>
