@@ -11,6 +11,17 @@ def login():
     'grillber.html'
     )
 
+@app.route('/submit_reservation', methods=['POST'])
+def submit_reservation():
+    shift = request.form.get('shift')
+    date = request.form.get('date')
+    size = request.form.get('size')
+    print "Shift : %s, Date: %s, Size: %s" % (shift,date,size)
+    return redirect('/')
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

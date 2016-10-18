@@ -45,16 +45,53 @@
       <div class="row meetteam" id="meetteam">
         <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="titlebox">
-            <h2>Meet the Team</h2>
+            <h2>Reservation</h2>
+
+          <div class="container jumbotron">
+
+        <form action="/submit_reservation" method="POST">
+      <input type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
+      <div class="radio">
+            <label>
+            <input type="radio" name="size" value="md" checked>
+            Medium Egg
+          </label>
+          <label>
+            <input type="radio" name="size" value="lg">
+            Large Egg
+          </label>
+          <label>
+            <input type="radio" name="size" value="xl">
+            Extra Large Egg
+          </label>
+        </div>
+
+        <div class="radio">
+              <label>
+              <input type="radio" name="shift" value="Morning" checked>
+              Morning
+            </label>
+            <label>
+              <input type="radio" name="shift" value="Evening">
+              Evening
+            </label>
+            <label>
+              <input type="radio" name="shift" value="Tailgate">
+              Tailgate
+            </label>
           </div>
 
-        </div>
-      </div>
+      <button type="submit" name="action" class="btn btn-default">Submit</button>
+
+    </form>
+    </div>
+</div>
+
+
 
       {% endblock %}
-
-    </div>
 
     <script type="text/javascript" src="javascript/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="javascript/activenav.js"></script>
     <script type="text/javascript" src="javascript/main.js"></script>
+</div>
