@@ -24,12 +24,22 @@
 #
 #
 # if __name__ == '__main__':
-#     app.run(debug=True)
-from flask import Flask, render_template, redirect, request, session, flash
-import pg
 
-app = Flask('app')
-db = pg.DB(dbname='grillber_db')
+#     app.run(debug=True)
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+from flask import Flask, render_template, redirect, request, session, flash
+import pg, os
+
+tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask('Wiki', template_folder=tmp_dir)
+
+db = pg.DB(
+    dbname=os.environ.get('PG_DBNAME'),
+    host=os.environ.get('PG_HOST'),
+    user=os.environ.get('PG_USERNAME'),
+    passwd=os.environ.get('PG_PASSWORD')
+)
 
 app.secret_key = 'keyur12345'
 
