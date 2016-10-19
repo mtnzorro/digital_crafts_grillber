@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Reserve Your Grill</title>
+  </head>
+  <body>
+    <div class="form-group">
+
+    <form class="form_style" action="/submit_reservation" method="POST">
+    <input class="date" type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
+    <div class="radio">
+      <label class="myeggs">
+      <input type="radio" name="size" value="md" checked>
+      Medium Egg
+    </label>
+    <label class="myeggs">
+      <input type="radio" name="size" value="lg">
+      Large Egg
+    </label>
+    <label class="myeggs">
+      <input type="radio" name="size" value="xl">
+      Extra Large Egg
+    </label>
+    </div>
+
+    <div class="radio">
+        <label class="myeggs">
+        <input type="radio" name="shift" value="Morning" checked>
+        Morning
+      </label>
+      <label class="myeggs">
+        <input type="radio" name="shift" value="Evening">
+        Evening
+      </label>
+      <label class="myeggs">
+        <input type="radio" name="shift" value="Tailgate">
+        Tailgate
+      </label>
+    </div>
+
+    <button type="submit" name="action" class="btn btn-default">Submit</button>
+
+    </form>
+    </div>
+
+  </body>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</html>
