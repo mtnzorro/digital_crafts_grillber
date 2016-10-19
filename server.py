@@ -92,7 +92,7 @@ def submit_login():
     if len(query)>0:
         user = query[0]
         if user.password == password:
-            session['user'] = user.name
+            session['user'] = user.email
             print "UEEEEEEEERTSRET!!!!"
             print session['user']
             return redirect('/')
@@ -103,13 +103,23 @@ def submit_login():
 
 
 
-# @app.route('/submit_reservation', methods=['POST'])
-# def submit_reservation():
-#     shift = request.form.get('shift')
-#     date = request.form.get('date')
-#     size = request.form.get('size')
-#     print "Shift : %s, Date: %s, Size: %s" % (shift,date,size)
-#     return redirect('/')
+@app.route('/submit_reservation', methods=['POST'])
+def submit_reservation():
+    date = request.form.get('date')
+    size = request.form.get('size')
+    query = db.query('''select grill.id from grill inner join size on size.id = grill.size_id where size.size = $1 and grill.id not in
+    (select grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $2)''',size,date).namedresult()
+    if len(query)>0:
+        cust = db.query("select * from customer where email=$1",session[user]).namedresult()[0]
+        db.insert('reservation',
+                reserve_date = date,
+                customer_id = cust.id,
+                grill_id = query[0].id
+                )
+    else:
+        print "sorry your size is not available."
+
+    return redirect('/')
 
 
 
