@@ -1,97 +1,180 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 
-{% block body %}
-<div class="scroll backdroppic" id="home">
-            <span>
-              <a href="#about"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
-            </span>
-        </div>
-      <div class="row scroll about next" id="about">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <div class="titlebox">
-            <h2>About Service</h2>
-          </div>
-
-          <span>
-              <a href="#products"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
-          </span>
-        </div>
-      </div>
-
-      <div class="row scroll products" id="products">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <div class="titlebox">
-          <h2>Products</h2>
-          </div>
-          <div class="col-sm-12 col-md-offset-1 col-md-5 project1">
-            <img src="http://placehold.it/250x150">
-          </div>
-          <div class="col-sm-12 col-md-5 project2">
-            <img src="http://placehold.it/250x150">
-          </div>
-          <div class="col-sm-12 col-md-offset-1 col-md-5 project3">
-            <img src="http://placehold.it/250x150">
-          </div>
-          <div class="col-sm-12 col-md-5 project4">
-            <img src="http://placehold.it/250x150">
-          </div>
-
-          <span>
-            <a href="#meetteam"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
-          </span>
-        </div>
-
-      </div>
-      <div class="row meetteam" id="meetteam">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <div class="titlebox">
-            <h2>Reservation</h2>
-
-          <div class="container jumbotron">
-
-        <form action="/submit_reservation" method="POST">
-      <input type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
-      <div class="radio">
-            <label>
-            <input type="radio" name="size" value="md" checked>
-            Medium Egg
-          </label>
-          <label>
-            <input type="radio" name="size" value="lg">
-            Large Egg
-          </label>
-          <label>
-            <input type="radio" name="size" value="xl">
-            Extra Large Egg
-          </label>
-        </div>
-
-        <div class="radio">
-              <label>
-              <input type="radio" name="shift" value="Morning" checked>
-              Morning
-            </label>
-            <label>
-              <input type="radio" name="shift" value="Evening">
-              Evening
-            </label>
-            <label>
-              <input type="radio" name="shift" value="Tailgate">
-              Tailgate
-            </label>
-          </div>
-
-      <button type="submit" name="action" class="btn btn-default">Submit</button>
-
-    </form>
-    </div>
-</div>
 
 
 
-      {% endblock %}
+{% block body %}
 
-    <script type="text/javascript" src="javascript/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="javascript/activenav.js"></script>
-    <script type="text/javascript" src="javascript/main.js"></script>
-</div>
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#two">About</a></li>
+							<li><a href="#one">Products</a></li>
+							<li><a href="#three">Reserve</a></li>
+              <li><a href="/login">Login</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+        <!-- Intro One-->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Grillber</h1>
+							<p>The Easiest Way to Grill on the Fly</p>
+							<ul class="actions">
+								<li><a href="#two" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+
+
+			    <!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>How It Works</h2>
+							<p>Not everyone has the space or the money for a high end grill. Grillber allows you to rent a Big Green Egg grill for part of a day or the entire day to entertain friends and family at a fraction of the cost of owning one.</p>
+							<div class="features">
+								<section>
+
+									<h3>Choose Your Grill Size</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+
+									<h3>Reserve Your Grill</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+
+									<h3>Pick Up Your Grill</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+
+									<h3>Return Your Grill</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+
+							</div>
+
+
+						</div>
+					</section>
+					<!-- One -->
+						<section id="one" class="wrapper style2 spotlights">
+							<section>
+								<a href="#" class="image"><img src="static/pics/med.jpg" alt="" data-position="center center" /></a>
+								<div class="content">
+									<div class="inner">
+										<h2>Medium Egg</h2>
+										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="#" class="image"><img src="static/pics/largeegg.jpg" alt="" data-position="top center" /></a>
+								<div class="content">
+									<div class="inner">
+										<h2>Large Egg</h2>
+										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="#" class="image"><img src="static/pics/xxlegg.jpg" alt="" data-position="25% 25%" /></a>
+								<div class="content">
+									<div class="inner">
+										<h2>XXL Egg</h2>
+										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+
+									</div>
+								</div>
+							</section>
+						</section>
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Reserve</h2>
+							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<div class="reservation">
+								<section>
+                  <div >
+
+                  <form action="/submit_reservation" method="POST">
+                  <input class="date" type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
+                  <div class="radio">
+                    <label class="myeggs">
+                    <input type="radio" name="size" value="md" checked>
+                    Medium Egg
+                  </label>
+                  <label class="myeggs">
+                    <input type="radio" name="size" value="lg">
+                    Large Egg
+                  </label>
+                  <label class="myeggs">
+                    <input type="radio" name="size" value="xl">
+                    Extra Large Egg
+                  </label>
+                  </div>
+
+                  <div class="radio">
+                      <label class="myeggs">
+                      <input type="radio" name="shift" value="Morning" checked>
+                      Morning
+                    </label>
+                    <label class="myeggs">
+                      <input type="radio" name="shift" value="Evening">
+                      Evening
+                    </label>
+                    <label class="myeggs">
+                      <input type="radio" name="shift" value="Tailgate">
+                      Tailgate
+                    </label>
+                  </div>
+
+                  <button type="submit" name="action" class="btn btn-default">Submit</button>
+
+                  </form>
+                  </div>
+								</section>
+
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Grillber 2016. All rights reserved.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/skel.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="static/js/main.js"></script>
+
+
+{% endblock %}
