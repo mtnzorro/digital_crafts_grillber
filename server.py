@@ -43,11 +43,6 @@ db = pg.DB(
 
 app.secret_key = 'keyur12345'
 
-@app.route('/')
-def reserve():
-    return render_template(
-    'reserve.html'
-    )
 
 
 @app.route('/')
@@ -55,6 +50,13 @@ def login():
     return render_template(
     'grillber.html'
     )
+
+@app.route('/reserve_date')
+def render_date():
+    return render_template(
+    'reserve.html'
+    )
+
 
 @app.route('/login')
 def log_in():
@@ -98,7 +100,9 @@ def submit_login():
     if len(query)>0:
         user = query[0]
         if user.password == password:
-            session['user'] = user.email
+            session['email'] = user.email
+            session['name'] = user.name
+            
             print "UEEEEEEEERTSRET!!!!"
             print session['user']
             return redirect('/')
@@ -109,26 +113,48 @@ def submit_login():
 
 
 
-@app.route('/submit_reservation', methods=['POST'])
-def submit_reservation():
-    date = request.form.get('date')
-    size = request.form.get('size')
-    query = db.query('''select grill.id from grill inner join size on size.id = grill.size_id where size.size = $1 and grill.id not in
-    (select grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $2)''',size,date).namedresult()
-    if len(query)>0:
-        cust = db.query("select * from customer where email=$1",session[user]).namedresult()[0]
-        db.insert('reservation',
-                reserve_date = date,
-                customer_id = cust.id,
-                grill_id = query[0].id
-                )
-    else:
-        print "sorry your size is not available."
+# @app.route('/submit_reservation', methods=['POST'])
+# def submit_reservation():
+#     date = request.form.get('date')
+#     size = request.form.get('size')
+#     query = db.query('''select grill.id from grill inner join size on size.id = grill.size_id where size.size = $1 and grill.id not in
+#     (select grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $2)''',size,date).namedresult()
+#     if len(query)>0:
+#         cust = db.query("select * from customer where email=$1",session[user]).namedresult()[0]
+#         db.insert('reservation',
+#                 reserve_date = date,
+#                 customer_id = cust.id,
+#                 grill_id = query[0].id
+#                 )
+#     else:
+#         print "sorry your size is not available."
+#
+#     return redirect('/')
 
+
+@app.route('/submit_date', methods=['POST'])
+def date_submit():
+    date = request.form.get('date')
+    query = db.query("Select distinct(size.size),size.reserve_btn_display from grill inner join size on size.id = grill.size_id and grill.id not in"
+"(SELECT grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $1"
+")",date).namedresult()
+    if len(query)>0:
+        print query
+        return render_template(
+        'reserve_grill.html',
+        query = query,
+        date = date
+        )
+    else:
+        print "All grills are booked on this day."
     return redirect('/')
 
 
-
+@app.route('/reserve_grill')
+def reserve_grill():
+    render_template(
+    'reserve_grill.html'
+    )
 
 
 if __name__ == '__main__':
