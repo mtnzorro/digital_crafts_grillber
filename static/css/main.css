@@ -3912,8 +3912,29 @@
 
 		@media screen and (max-width: 1280px) {
 
-			#intro {
-				background-attachment: scroll;
-			}
+#intro {
+	background-attachment: scroll;
+}
 
-		}
+}
+body {
+background-color: green;
+}
+
+body form .form_style {
+margin-top: 100px;
+}
+
+div.container.jumbotron.col-md-offset-4.col-md-4 {
+margin-top: 100px;
+}
+
+.reserve {
+text-align: center;
+justify-content: center;
+width: 400px;
+position: absolute;
+left: 0;
+right: 0;
+margin: auto;
+}
