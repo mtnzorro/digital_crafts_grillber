@@ -1,0 +1,25 @@
+{%extends "layout.html"%}
+{% block body %}
+<div>
+<table>
+{% for reservation in query%}
+<tr>
+  <td>
+    {{reservation.reserve_date}}
+  </td>
+  <td>
+    {{reservation.size}}
+  </td>
+  <td>
+    <button type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
+  </td>
+</tr>
+
+
+{% endfor%}
+</table>
+
+
+</div>
+
+{% endblock %}

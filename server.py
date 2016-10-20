@@ -68,6 +68,7 @@ def log_in():
 def logout():
     del session['email']
     del session['name']
+    del session['id']
     return render_template(
     'grillber.html'
     )
@@ -111,6 +112,8 @@ def submit_login():
         if user.password == password:
             session['email'] = user.email
             session['name'] = user.name
+            session['id'] = user.id
+            print session['id']
             print session['name']
             return redirect('/')
     else:
@@ -140,7 +143,7 @@ def submit_login():
 @app.route('/submit_date', methods=['POST'])
 def date_submit():
     date = request.form.get('date')
-    query = db.query("Select distinct(size.size),size.reserve_btn_display from grill inner join size on size.id = grill.size_id and grill.id not in"
+    query = db.query("Select distinct on (size.size) size.size, grill.id, size.reserve_btn_display from grill inner join size on size.id = grill.size_id and grill.id not in"
 "(SELECT grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $1"
 ")",date).namedresult()
     if len(query)>0:
@@ -159,20 +162,31 @@ def reserve_grill():
     render_template(
     'reserve_grill.html'
     )
+
 @app.route('/submit_reservation',methods =['POST'])
 def reserve_confirmation():
-    grill_size = request.form.get('size')
+    grill_id = request.form.get('id')
     email = session['email']
-    cust_id = db.query("select id from customer where email=$1",email).namedresult()[0].id
+    cust_id = session['id']
     date = request.form.get('date')
-    print cust_id
-
-    
+    size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
+    db.insert('reservation',
+    reserve_date = date,
+    grill_id = grill_id,
+    customer_id = cust_id)
 
     return render_template(
-    'reserve_grill.html'
+    'confirmation.html',
+    date = date,
+    size = size
     )
-
+@app.route('/account')
+def account():
+    query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id where customer_id = $1",session['id']).namedresult()
+    return render_template(
+    'account.html',
+    query = query
+    )
 
 
 if __name__ == '__main__':
