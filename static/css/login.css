@@ -1,4 +1,11 @@
 body {
-
   background-color: green;
+}
+
+body form .form_style {
+  margin-top: 100px;
+}
+
+div.container.jumbotron.col-md-offset-4.col-md-4 {
+  margin-top: 100px;
 }
