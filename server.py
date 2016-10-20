@@ -102,7 +102,7 @@ def submit_login():
         if user.password == password:
             session['email'] = user.email
             session['name'] = user.name
-            
+
             print "UEEEEEEEERTSRET!!!!"
             print session['user']
             return redirect('/')
