@@ -43,6 +43,12 @@ db = pg.DB(
 
 app.secret_key = 'keyur12345'
 
+@app.route('/')
+def reserve():
+    return render_template(
+    'reserve.html'
+    )
+
 
 @app.route('/')
 def login():
