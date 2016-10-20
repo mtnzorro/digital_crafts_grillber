@@ -1,24 +1,30 @@
-{% extends 'layout.html' %}
+{%extends "layout.html"%}
+{% block body %}
 
-{% block body%}
-<head>
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/login.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-  <h1 class="reserve_title">Reserve Your Grill</h1>
-</head>
     <div class="form-group reserve">
 
-    <form class="form_style" action="/submit_reservation" method="POST">
+    <form class="form_style" action="/submit_date" method="POST">
     <input class="date" type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
+    <!-- <div class="radio">
+      <label class="myeggs">
+      <input type="radio" name="size" value="md" checked>
+      Medium Egg
+    </label>
+    <label class="myeggs">
+      <input type="radio" name="size" value="lg">
+      Large Egg
+    </label>
+    <label class="myeggs">
+      <input type="radio" name="size" value="xl">
+      Extra Large Egg
+    </label>
+    </div> -->
 
     <button type="submit" name="action" class="btn btn-default">Submit</button>
 
- </form>
- </div>
+    </form>
+    </div>
+
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
@@ -26,4 +32,5 @@
     $( "#datepicker" ).datepicker();
   } );
   </script>
+
 {% endblock %}
