@@ -75,7 +75,9 @@
 					<!-- One -->
 						<section id="one" class="wrapper style2 spotlights">
 							<section>
-								<a href="#" class="image"><img src="static/pics/med.jpg" alt="" data-position="center center" /></a>
+								<a href="#" class="image" style="background-image: url('static/pics/med.jpg');background-position: center center;">
+									<!-- <img src="static/pics/med.jpg" alt data-position="center center"> -->
+								</a>
 								<div class="content">
 									<div class="inner">
 										<h2>Medium Egg</h2>
@@ -85,7 +87,7 @@
 								</div>
 							</section>
 							<section>
-								<a href="#" class="image"><img src="static/pics/largeegg.jpg" alt="" data-position="top center" /></a>
+								<a href="#" class="image" style="background-image: url('static/pics/largeegg.jpg');background-position: center center;"></a>
 								<div class="content">
 									<div class="inner">
 										<h2>Large Egg</h2>
@@ -95,7 +97,7 @@
 								</div>
 							</section>
 							<section>
-								<a href="#" class="image"><img src="static/pics/xxlegg.jpg" alt="" data-position="25% 25%" /></a>
+								<a href="#" class="image" style="background-image: url('static/pics/xxlegg.jpg');background-position: center center;"></a>
 								<div class="content">
 									<div class="inner">
 										<h2>XXL Egg</h2>
@@ -112,8 +114,48 @@
 							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
 							<div class="reservation">
 								<section>
-									<a href="/reserve">Make Your Reservation</a>
+                  <div >
 
+                  <form action="/submit_reservation" method="POST">
+                  <input class="date" type="text" id="datepicker" name="date" placeholder="10/12/2016" required>
+                  <div class="radio">
+                    <label class="myeggs">
+                    <input type="radio" name="size" value="md" checked>
+                    Medium Egg
+                  </label>
+                  <label class="myeggs">
+                    <input type="radio" name="size" value="lg">
+                    Large Egg
+                  </label>
+                  <label class="myeggs">
+                    <input type="radio" name="size" value="xl">
+                    Extra Large Egg
+                  </label>
+                  </div>
+
+                  <div class="radio">
+                      <label class="myeggs">
+                      <input type="radio" name="shift" value="Morning" checked>
+                      Morning
+                    </label>
+                    <label class="myeggs">
+                      <input type="radio" name="shift" value="Evening">
+                      Evening
+                    </label>
+                    <label class="myeggs">
+                      <input type="radio" name="shift" value="Tailgate">
+                      Tailgate
+                    </label>
+                  </div>
+
+                  <button type="submit" name="action" class="btn btn-default">Submit</button>
+
+                  </form>
+                  </div>
+								</section>
+
+							</div>
+						</div>
 					</section>
 
 			</div>
