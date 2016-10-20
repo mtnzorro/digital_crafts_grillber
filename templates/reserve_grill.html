@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
- <head>
-   <meta charset="utf-8">
+{%extends "layout.html"%}
+{% block body %}
 
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   <link rel="stylesheet" href="/static/css/login.css">
-   <title>Reserve Your Grill</title>
- </head>
- <body>
    <div class="form-group">
 
    <form class="form_style" action="/submit_reservation" method="POST">
@@ -19,7 +12,6 @@
    </form>
    </div>
 
- </body>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <script>
@@ -27,4 +19,5 @@
    $( "#datepicker" ).datepicker();
  } );
  </script>
-</html>
+
+ {% endblock %}

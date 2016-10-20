@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <link rel="stylesheet" href="static/css/login.css">
+{%extends "layout.html"%}
+{% block body %}
 
-    <title>Sign Up</title>
-  </head>
-  <body>
     <form class="form_style" action="/submit_signup" method="POST">
     <div class="container jumbotron col-md-offset-4 col-md-4">
       <div class = "form-group">
@@ -29,6 +22,4 @@
       </div>
     </div>
     </form>
-
-  </body>
-</html>
+{% endblock %}
