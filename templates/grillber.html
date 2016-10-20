@@ -1,36 +1,38 @@
-{% extends 'layout.html' %}
-<!--
-	Hyperspace by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/css/main.css" />
+  </head>
+  <body>
+    <section id="sidebar">
+      <div class="inner">
+        <nav>
+          <ul>
+						<li><a>Hello, {{session['name'] or 'there'}}!</a></li>
+            <li><a href="#intro">Welcome</a></li>
+            <li><a href="#two">About</a></li>
+            <li><a href="#one">Products</a></li>
+            <li><a href="#three">Reserve</a></li>
+            {% if not session['name'] %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if session['name'] %}
+            <li><a href="/login">Logout</a></li>
+						<li><a href="/account">Account</a></li>
+            {% endif %}
 
 
+          </ul>
+        </nav>
+      </div>
+    </section>
 
-
-{% block body %}
-
-		<!-- Sidebar -->
-			<section id="sidebar">
-				<div class="inner">
-					<nav>
-						<ul>
-							<li><a href="#intro">Welcome</a></li>
-							<li><a href="#two">About</a></li>
-							<li><a href="#one">Products</a></li>
-							<li><a href="#three">Reserve</a></li>
-							{% if not session['name'] %}
-              <li><a href="/login">Login</a></li>
-							{% endif %}
-							{% if session['name'] %}
-							<li><a href="/login">Logout</a></li>
-							{% endif %}
-							<li><a>Hello, {{session['name'] or 'there'}}!</a></li>
-
-						</ul>
-					</nav>
-				</div>
-			</section>
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -144,4 +146,12 @@
 			<script src="static/js/main.js"></script>
 
 
-{% endblock %}
+	</body>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</html>
