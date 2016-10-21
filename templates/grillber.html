@@ -8,6 +8,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="static/css/main.css" />
+    <link rel="shortcut icon" type="image/png" href="static/pics/favicon.ico">
   </head>
   <body>
     <section id="sidebar">
@@ -18,7 +19,7 @@
             <li><a href="#intro">Welcome</a></li>
             <li><a href="#two">About</a></li>
             <li><a href="#one">Products</a></li>
-            <li><a href="#three">Reserve</a></li>
+            <li><a href="/reserve_date">Reserve</a></li>
             {% if not session['name'] %}
             <li><a href="/login">Login</a></li>
             {% endif %}
@@ -26,6 +27,7 @@
             <li><a href="/logout">Logout</a></li>
 						<li><a href="/account">Account</a></li>
             {% endif %}
+
 
 
           </ul>
@@ -41,6 +43,7 @@
 						<div class="inner">
 							<h1>Grillber</h1>
 							<p>The Easiest Way to Grill on the Fly</p>
+              <img src="static/pics/logo.png" alt="logo" />
 							<ul class="actions">
 								<li><a href="#two" class="button scrolly">Learn more</a></li>
 							</ul>
@@ -50,82 +53,81 @@
 
 
 			    <!-- Two -->
-					<section id="two" class="wrapper style3 fade-up">
-						<div class="inner">
-							<h2>How It Works</h2>
-							<p>Not everyone has the space or the money for a high end grill. Grillber allows you to rent a Big Green Egg grill for part of a day or the entire day to entertain friends and family at a fraction of the cost of owning one.</p>
-							<div class="features">
-								<section>
-
-									<h3>Choose Your Grill Size</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-
-									<h3>Reserve Your Grill</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-
-									<h3>Pick Up Your Grill</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-
-									<h3>Return Your Grill</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-
-							</div>
-
-
-						</div>
-					</section>
-					<!-- One -->
-						<section id="one" class="wrapper style2 spotlights">
-							<section>
-								<a href="#" class="image" style="background-image: url('static/pics/med.jpg');background-position: center center;"></a>
-								<div class="content">
-									<div class="inner">
-										<h2>Medium Egg</h2>
-										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-
-									</div>
-								</div>
-							</section>
-							<section>
-								<a href="#" class="image" style="background-image: url('static/pics/largeegg.jpg');background-position: center center;"></a>
-								<div class="content">
-									<div class="inner">
-										<h2>Large Egg</h2>
-										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-
-									</div>
-								</div>
-							</section>
-							<section>
-								<a href="#" class="image" style="background-image: url('static/pics/xxlegg.jpg');background-position: center center;"></a>
-								<div class="content">
-									<div class="inner">
-										<h2>XXL Egg</h2>
-										<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-
-									</div>
-								</div>
-							</section>
-						</section>
-				<!-- Three -->
-					<section id="three" class="wrapper style1 fade-up">
-						<div class="inner">
-							<h2>Reserve</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
-							<div class="reservation">
-								<section>
-									<a href="/reserve_date">Make Your Reservation</a>
-
-					</section>
-
-			</div>
+          <section id="two" class="wrapper style3 fade-up">
+           <div class="inner">
+               <h2>How It Works</h2>
+               <p>Not everyone has the space or the money for a high end grill. Grillber allows you to rent a Big Green Egg grill for part of a day or the entire day to entertain friends and family at a fraction of the cost of owning one.</p>
+               <div class="features">
+                   <section>
+                       <h1>1</h1><h3>Reserve Your Grill</h3>
+                       <p>Make your reservation by selecting the date.  Then choose your grill from the available sizes.</p>
+                       </section>
+                       <section>
+                       <h1>2</h1><h3>Choose Your Grill Size</h3>
+                       <p>From a small BBQ to a weekend tail-gate party, we a variety of Big Green Egg sizes that will best suites your needs.</p>
+                   </section>
+                   <section>
+                       <h1>3</h1><h3>Pick Up Your Grill</h3>
+                       <p>Once you have reserved your grill, you can come pick it up from our site.</p>
+                   </section>
+                   <section>
+                       <h1>4</h1><h3>Return Your Grill</h3>
+                       <p>Return your grill to Grillber and let us help you reserve a grill for your next event!</p>
+                   </section>
+               </div>
+           </div>
+       </section>
+       <!-- One -->
+           <section id="one" class="wrapper style2 spotlights">
+               <section>
+                   <a href="#" class="image" style="background-image: url('static/pics/med.jpg');background-position: center center;"></a>
+                   <div class="content">
+                       <div class="inner">
+                           <h2>Medium Egg</h2>
+                           <p>Happiness in a smaller package – the Medium EGG is perfectly sized for smaller families and couples.  Get all the famous Big Green Egg versatility and efficiency in a smaller package with plenty of cooking area to accommodate a backyard cookout of four steaks or two whole chickens.</p>
+                           <h5>Specifications</h5>
+                           Grid Diameter: 15 in / 38 cm
+                           Cooking Area: 177 sq in / 1140 sq cm
+                           Weight: 113 lbs / 51 kgs
+                           <br><br>
+                           <h5>The Medium EGG can cook:</h5>
+                            18-pound turkey, 6 burgers, 3 chickens vertically, 4 steaks, or 4 racks of ribs vertically
+                       </div>
+                   </div>
+               </section>
+               <section>
+                   <a href="#" class="image" style="background-image: url('static/pics/largeegg.jpg');background-position: center center;"></a>
+                   <div class="content">
+                       <div class="inner">
+                           <h2>Large Egg</h2>
+                           <p>The Large EGG is the most popular size and a favorite to handle the cooking needs of most families and gatherings of friends. Accommodates all EGGcessories for baking, roasting or smoking – and it’s versatile enough for weekend cookouts or pizza parties, large enough for eight steaks at once, and efficient enough for an impromptu meatloaf for two!</p>
+                           <h5>Specifications</h5>
+                           Grid Diameter: 18.25 in / 46 cm
+                           Cooking Area: 262 sq in / 1688 sq cm
+                           Weight: 162 lbs / 73 kgs
+                           <br><br>
+                           <h5>The Large EGG can cook:</h5>
+                            20-pound turkeys, 12 burgers, 6 chickens vertically, 8 steaks, or 7 racks of ribs vertically</h5>
+                       </div>
+                   </div>
+               </section>
+               <section>
+                   <a href="#" class="image" style="background-image: url('static/pics/xxlegg.jpg');background-position: center center;"></a>
+                   <div class="content">
+                       <div class="inner">
+                           <h2>XXL Egg</h2>
+                           <p>The Biggest Green Egg of them all, the unrivaled XXLarge EGG can easily handle your family reunion or cookouts with large groups – and is more than large enough to satisfy restaurant and catering needs. You’ll need to gather a crowd to tackle all of the ribs, steaks and burgers this EGG can handle … all at once! You can even roast a suckling pig … explore all the culinary possibilities with the new XXL!</p>
+                           <h5>Specifications</h5>
+                           Grid Diameter: 29 in / 74 cm
+                           Cooking Area: 672 sq in / 4336 sq cm
+                           Weight: 470 lbs / 213 kgs
+                           <br><br>
+                           <h5>The XXLarge EGG can cook:</h5>
+                           35-40 burgers, 14-16 whole chickens, 18-20 steaks, 20 mouth-watering racks of rib vertically, or 1 perfectly crisp suckling pig</h5>
+                       </div>
+                   </div>
+               </section>
+           </section>
 
 		<!-- Footer -->
 			<footer id="footer" class="wrapper style1-alt">

@@ -1,31 +1,3 @@
-# from flask import Flask, render_template, redirect, request, session, flash
-# import pg
-#
-# app = Flask('app')
-#
-# @app.route('/')
-# def login():
-#
-#     return render_template(
-#     'grillber.html'
-#     )
-#
-# @app.route('/submit_reservation', methods=['POST'])
-# def submit_reservation():
-#     shift = request.form.get('shift')
-#     date = request.form.get('date')
-#     size = request.form.get('size')
-#
-#     print "Shift : %s, Date: %s, Size: %s" % (shift,date,size)
-#     return redirect('/')
-#
-#
-#
-#
-#
-# if __name__ == '__main__':
-
-#     app.run(debug=True)
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 from flask import Flask, render_template, redirect, request, session, flash
@@ -117,26 +89,6 @@ def submit_login():
         return redirect('/login')
 
 
-
-# @app.route('/submit_reservation', methods=['POST'])
-# def submit_reservation():
-#     date = request.form.get('date')
-#     size = request.form.get('size')
-#     query = db.query('''select grill.id from grill inner join size on size.id = grill.size_id where size.size = $1 and grill.id not in
-#     (select grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $2)''',size,date).namedresult()
-#     if len(query)>0:
-#         cust = db.query("select * from customer where email=$1",session[user]).namedresult()[0]
-#         db.insert('reservation',
-#                 reserve_date = date,
-#                 customer_id = cust.id,
-#                 grill_id = query[0].id
-#                 )
-#     else:
-#         print "sorry your size is not available."
-#
-#     return redirect('/')
-
-
 @app.route('/submit_date', methods=['POST'])
 def date_submit():
     date = request.form.get('date')
@@ -150,7 +102,7 @@ def date_submit():
         date = date
         )
     else:
-        print "All grills are booked on this day."
+        flash ("All grills are booked on this day.")
     return redirect('/')
 
 
@@ -161,7 +113,9 @@ def reserve_grill():
     )
 
 @app.route('/submit_reservation',methods =['POST'])
+
 def reserve_confirmation():
+    if ('id' in session):
         grill_id = request.form.get('id')
         email = session['email']
         cust_id = session['id']
@@ -176,12 +130,15 @@ def reserve_confirmation():
         date = date,
         size = size
         )
+    else:
+        flash('Please login to reserve.')
+        return render_template(
+        'login.html')
 
-<<<<<<< HEAD
 @app.route('/account')
 def account():
     query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id").namedresult()
-    if session['id'] == 10:
+    if (session['name'] == "owner"):
         return render_template(
         'owner_account.html',
         query= query
@@ -191,20 +148,8 @@ def account():
         'account.html',
         query = query
         )
-=======
-    return render_template(
-    'confirmation.html',
-    date = date,
-    size = size
-    )
 
-@app.route('/account')
-def account():
-    query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id where customer_id = $1",session['id']).namedresult()
-    return render_template(
-    'account.html',
-    query = query
-    )
+
 @app.route('/submit_cancel',methods =['POST'])
 def cancel_submit():
     reservation_id = request.form.get('cancel')
@@ -225,27 +170,7 @@ def cancel_submit():
     flash('You have successfully cancelled your reservation')
     return redirect ('/account')
 
->>>>>>> 998f7d1a4333191fb53a48b9ae02f958233c7eac
 
-@app.route('/submit_cancel',methods =['POST'])
-def cancel_submit():
-   reservation_id = request.form.get('cancel')
-   print reservation_id
-   query = db.query("select * from reservation where reservation.id = $1",reservation_id).namedresult()[0]
-   reserve_date = query.reserve_date
-   customer_id = query.customer_id
-   grill_id = query.grill_id
-   print reserve_date
-   print customer_id
-   print grill_id
-   db.delete('reservation',
-       id = reservation_id,
-       reserve_date = query.reserve_date,
-       customer_id = query.customer_id,
-       grill_id = query.grill_id
-   )
-   flash('You have successfully cancelled your reservation')
-   return redirect ('/account')
 
 if __name__ == '__main__':
     app.run(debug=True)

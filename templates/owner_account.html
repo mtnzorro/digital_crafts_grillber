@@ -2,7 +2,8 @@
 {% block body %}
 
 <div>
-<table class="table table-condensed">
+<table class="table">
+  <thead class="thead-inverse">
   <tr>
     <th>
       reservation date
@@ -14,16 +15,18 @@
       cancel reservation
     </th>
   </tr>
+</thead>
 {% for reservation in query%}
 
 <tr>
   <td>{{reservation.reserve_date}}</td>
   <td>{{reservation.size}}</td>
-<td>  <form action="/submit_cancel" method="post">
-    <button type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
-  </form></td>
+<td><form action="/submit_cancel" method="post">
+    <button class="btn btn-danger" type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
+  </form>
+</td>
 </tr>
-  
+
 {% endfor%}
 </table>
 </div>
