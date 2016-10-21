@@ -166,7 +166,7 @@ def cancel_submit():
         customer_id = query.customer_id,
         grill_id = query.grill_id
     )
-    # flash('You have successfully cancelled your reservation')
+    flash('You have successfully cancelled your reservation')
     return redirect ('/account')
 
 
