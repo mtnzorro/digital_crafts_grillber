@@ -103,7 +103,7 @@ def date_submit():
         )
     else:
         flash ("All grills are booked on this day.")
-    return redirect('/')
+    return redirect('/reserve_date')
 
 
 @app.route('/reserve_grill')
