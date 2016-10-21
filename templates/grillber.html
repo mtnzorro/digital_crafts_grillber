@@ -15,10 +15,10 @@
       <div class="inner">
         <nav>
           <ul>
-						<li><a>Hello, {{session['name'] or 'there'}}!</a></li>
-            <li><a href="#intro">Welcome</a></li>
-            <li><a href="#two">About</a></li>
-            <li><a href="#one">Products</a></li>
+						<li class="remove"><a>Hello, {{session['name'] or 'there'}}!</a></li>
+            <li class="remove"><a href="#intro">Welcome</a></li>
+            <li class="remove"><a href="#two">About</a></li>
+            <li class="remove"><a href="#one">Products</a></li>
             <li><a href="/reserve_date">Reserve</a></li>
             {% if not session['name'] %}
             <li><a href="/login">Login</a></li>
@@ -80,7 +80,7 @@
        <!-- One -->
            <section id="one" class="wrapper style2 spotlights">
                <section>
-                   <a href="#" class="image" style="background-image: url('static/pics/med.jpg');background-position: center center;"></a>
+                   <a href="/reserve_date" class="image" style="background-image: url('static/pics/med.jpg');background-position: center center;"></a>
                    <div class="content">
                        <div class="inner">
                            <h2>Medium Egg</h2>
@@ -96,7 +96,7 @@
                    </div>
                </section>
                <section>
-                   <a href="#" class="image" style="background-image: url('static/pics/largeegg.jpg');background-position: center center;"></a>
+                   <a href="/reserve_date" class="image" style="background-image: url('static/pics/largeegg.jpg');background-position: center center;"></a>
                    <div class="content">
                        <div class="inner">
                            <h2>Large Egg</h2>
@@ -107,12 +107,12 @@
                            Weight: 162 lbs / 73 kgs
                            <br><br>
                            <h5>The Large EGG can cook:</h5>
-                            20-pound turkeys, 12 burgers, 6 chickens vertically, 8 steaks, or 7 racks of ribs vertically</h5>
+                            20-pound turkeys, 12 burgers, 6 chickens vertically, 8 steaks, or 7 racks of ribs vertically
                        </div>
                    </div>
                </section>
                <section>
-                   <a href="#" class="image" style="background-image: url('static/pics/xxlegg.jpg');background-position: center center;"></a>
+                   <a href="/reserve_date" class="image" style="background-image: url('static/pics/xxlegg.jpg');background-position: center center;"></a>
                    <div class="content">
                        <div class="inner">
                            <h2>XXL Egg</h2>
@@ -123,12 +123,12 @@
                            Weight: 470 lbs / 213 kgs
                            <br><br>
                            <h5>The XXLarge EGG can cook:</h5>
-                           35-40 burgers, 14-16 whole chickens, 18-20 steaks, 20 mouth-watering racks of rib vertically, or 1 perfectly crisp suckling pig</h5>
+                           35-40 burgers, 14-16 whole chickens, 18-20 steaks, 20 mouth-watering racks of rib vertically, or 1 perfectly crisp suckling pig
                        </div>
                    </div>
                </section>
            </section>
-
+         </div>
 		<!-- Footer -->
 			<footer id="footer" class="wrapper style1-alt">
 				<div class="inner">
@@ -137,7 +137,7 @@
 					</ul>
 				</div>
 			</footer>
-
+	</body>
 		<!-- Scripts -->
 			<script src="static/js/jquery.min.js"></script>
 			<script src="static/js/jquery.scrollex.min.js"></script>
@@ -148,7 +148,7 @@
 			<script src="static/js/main.js"></script>
 
 
-	</body>
+
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
