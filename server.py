@@ -29,6 +29,7 @@ def render_date():
     'reserve.html'
     )
 
+
 @app.route('/login')
 def log_in():
     return render_template(
@@ -84,6 +85,8 @@ def submit_login():
             session['email'] = user.email
             session['name'] = user.name
             session['id'] = user.id
+            print session['id']
+            print session['name']
             return redirect('/')
     else:
         return redirect('/login')
@@ -137,8 +140,8 @@ def reserve_confirmation():
 
 @app.route('/account')
 def account():
-    query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id").namedresult()
-    if (session['name'] == "owner"):
+    query = db.query("select reservation.id as rid, customer.*, customer_id,reservation.reserve_date, size.size, grill.id as g_id, grill.is_rented from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id inner join customer on reservation.customer_id = customer.id ").namedresult()
+    if session['name'] == "owner":
         return render_template(
         'owner_account.html',
         query= query
@@ -148,7 +151,6 @@ def account():
         'account.html',
         query = query
         )
-
 
 @app.route('/submit_cancel',methods =['POST'])
 def cancel_submit():
@@ -171,6 +173,15 @@ def cancel_submit():
     return redirect ('/account')
 
 
+@app.route('/submit_rental', methods=['POST'])
+def submit_rental():
+    status = request.form.get('rent')
+    grill_id = request.form.get('grill_id')
+    db.update('grill',{
+        'id': grill_id,
+        'is_rented': status
+    })
+    return redirect('/account')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -12,7 +12,25 @@
       grill size
     </th>
     <th>
-      cancel reservation
+      customer name
+    </th>
+    <th>
+    street
+    </th>
+    <th>
+      zip code
+    </th>
+    <th>
+      email
+    </th>
+    <th>
+      phone number
+    </th>
+    <th>
+      Cancel
+    </th>
+    <th>
+      Status
     </th>
   </tr>
 </thead>
@@ -21,10 +39,28 @@
 <tr>
   <td>{{reservation.reserve_date}}</td>
   <td>{{reservation.size}}</td>
+  <td>{{reservation.name}}</td>
+  <td>{{reservation.street}}</td>
+  <td>{{reservation.zip_code}}</td>
+  <td>{{reservation.email}}</td>
+  <td>{{reservation.phone}}</td>
+
+  {% if reservation.is_rented == False %}
+  <td><form action="/submit_rental" method="post">
+      <input type="hidden" name="grill_id" value="{{reservation.g_id}}">
+      <button type="submit" class = "btn btn-warning" name="rent" value="True">Rent</button>
+    </form></td>
+    {%elif reservation.is_rented == True%}
+    <td><form action="/submit_rental" method="post">
+      <input type="hidden" name="grill_id" value="{{reservation.g_id}}">
+        <button type="submit" class = "btn btn-primary" name="rent" value="False">Return</button>
+      </form></td>
+      {%endif%}
 <td><form action="/submit_cancel" method="post">
     <button class="btn btn-danger" type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
   </form>
 </td>
+
 </tr>
 
 {% endfor%}
