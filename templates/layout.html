@@ -16,6 +16,7 @@
       <div class="inner">
         <nav>
           <ul>
+            <li><a>HELLO, {{session['name'] or 'THERE'}}!</a></li>
             <li><a href="/">WELCOME</a></li>
             <li><a href="/reserve_date">RESERVE</a></li>
             {% if not session['name'] %}
@@ -25,7 +26,11 @@
             <li><a href="/login">LOGOUT</a></li>
             <li><a href="/account">ACCOUNT</a></li>
             {% endif %}
-            <li><a>Hello, {{session['name'] or 'THERE'}}!</a></li>
+            {% if session['name'] == "owner" %}
+            <li><a href="/account">Account</a></li>
+
+            {% endif %}
+
 
           </ul>
         </nav>

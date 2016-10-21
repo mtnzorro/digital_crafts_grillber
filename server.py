@@ -59,8 +59,6 @@ def submit_signup():
     zip_code = request.form.get('zip_code')
     phone = request.form.get('phone')
     name = request.form.get('name')
-
-
     db.insert('customer',
     email = email,
     password = password,
@@ -69,7 +67,6 @@ def submit_signup():
     phone = phone,
     name = name
     )
-
     return redirect('/login')
 
 
@@ -111,7 +108,7 @@ def date_submit():
 
 @app.route('/reserve_grill')
 def reserve_grill():
-    render_template(
+    return render_template(
     'reserve_grill.html'
     )
 
@@ -140,7 +137,7 @@ def reserve_confirmation():
 
 @app.route('/account')
 def account():
-    query = db.query("select reservation.id as rid, customer.*, customer_id,reservation.reserve_date, size.size, grill.id as g_id, grill.is_rented from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id inner join customer on reservation.customer_id = customer.id ").namedresult()
+    query = db.query("select reservation.id as rid, customer.*, customer_id,reservation.reserve_date, size.size, grill.id as g_id, grill.is_rented, grill.unit_name from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id inner join customer on reservation.customer_id = customer.id ").namedresult()
     if session['name'] == "owner":
         return render_template(
         'owner_account.html',
@@ -169,7 +166,7 @@ def cancel_submit():
         customer_id = query.customer_id,
         grill_id = query.grill_id
     )
-    flash('You have successfully cancelled your reservation')
+    # flash('You have successfully cancelled your reservation')
     return redirect ('/account')
 
 
@@ -184,4 +181,7 @@ def submit_rental():
     return redirect('/account')
 
 if __name__ == '__main__':
+    # from gevent.wsgi import WSGIServer
+    # http_server = WSGIServer(('', 5000), app)
+    # http_server.serve_forever()
     app.run(debug=True)
