@@ -57,7 +57,6 @@ def render_date():
     'reserve.html'
     )
 
-
 @app.route('/login')
 def log_in():
     return render_template(
@@ -113,8 +112,6 @@ def submit_login():
             session['email'] = user.email
             session['name'] = user.name
             session['id'] = user.id
-            print session['id']
-            print session['name']
             return redirect('/')
     else:
         return redirect('/login')
@@ -165,29 +162,54 @@ def reserve_grill():
 
 @app.route('/submit_reservation',methods =['POST'])
 def reserve_confirmation():
-    grill_id = request.form.get('id')
-    email = session['email']
-    cust_id = session['id']
-    date = request.form.get('date')
-    size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
-    db.insert('reservation',
-    reserve_date = date,
-    grill_id = grill_id,
-    customer_id = cust_id)
+        grill_id = request.form.get('id')
+        email = session['email']
+        cust_id = session['id']
+        date = request.form.get('date')
+        size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
+        db.insert('reservation',
+        reserve_date = date,
+        grill_id = grill_id,
+        customer_id = cust_id)
+        return render_template(
+        'confirmation.html',
+        date = date,
+        size = size
+        )
 
-    return render_template(
-    'confirmation.html',
-    date = date,
-    size = size
-    )
 @app.route('/account')
 def account():
-    query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id where customer_id = $1",session['id']).namedresult()
-    return render_template(
-    'account.html',
-    query = query
-    )
+    query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id").namedresult()
+    if session['id'] == 10:
+        return render_template(
+        'owner_account.html',
+        query= query
+        )
+    else:
+        return render_template(
+        'account.html',
+        query = query
+        )
 
+@app.route('/submit_cancel',methods =['POST'])
+def cancel_submit():
+   reservation_id = request.form.get('cancel')
+   print reservation_id
+   query = db.query("select * from reservation where reservation.id = $1",reservation_id).namedresult()[0]
+   reserve_date = query.reserve_date
+   customer_id = query.customer_id
+   grill_id = query.grill_id
+   print reserve_date
+   print customer_id
+   print grill_id
+   db.delete('reservation',
+       id = reservation_id,
+       reserve_date = query.reserve_date,
+       customer_id = query.customer_id,
+       grill_id = query.grill_id
+   )
+   flash('You have successfully cancelled your reservation')
+   return redirect ('/account')
 
 if __name__ == '__main__':
     app.run(debug=True)

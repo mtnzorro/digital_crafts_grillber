@@ -15,7 +15,7 @@
     </th>
   </tr>
 {% for reservation in query%}
-  {% if (reservation.customer_id == session['id']) %}
+
 <tr>
   <td>{{reservation.reserve_date}}</td>
   <td>{{reservation.size}}</td>
@@ -23,7 +23,7 @@
     <button type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
   </form></td>
 </tr>
-  {% endif %}
+  
 {% endfor%}
 </table>
 </div>
