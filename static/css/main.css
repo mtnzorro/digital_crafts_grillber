@@ -3874,7 +3874,7 @@
 
 		@media screen and (max-width: 736px) {
 
-			#sidebar {
+			#sidebar nav ul li.remove {
 				display: none;
 			}
 
