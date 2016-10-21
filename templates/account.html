@@ -11,7 +11,9 @@
     {{reservation.size}}
   </td>
   <td>
-    <button type="submit" name="cancel" value="{{reservation.rid}}">Cancel</button>
+    <form class="" action="/submit_cancel" method="post">
+    <button type="submit" name="cancel" value="{{reservation.rid}}" >Cancel</button>
+      </form>
   </td>
 </tr>
 

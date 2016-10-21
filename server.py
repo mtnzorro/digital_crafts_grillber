@@ -180,6 +180,7 @@ def reserve_confirmation():
     date = date,
     size = size
     )
+
 @app.route('/account')
 def account():
     query = db.query("select reservation.id as rid, customer_id,reservation.reserve_date, size.size from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id where customer_id = $1",session['id']).namedresult()
@@ -187,6 +188,26 @@ def account():
     'account.html',
     query = query
     )
+@app.route('/submit_cancel',methods =['POST'])
+def cancel_submit():
+    reservation_id = request.form.get('cancel')
+    print reservation_id
+    query = db.query("select * from reservation where reservation.id = $1",reservation_id).namedresult()[0]
+    reserve_date = query.reserve_date
+    customer_id = query.customer_id
+    grill_id = query.grill_id
+    print reserve_date
+    print customer_id
+    print grill_id
+    db.delete('reservation',
+        id = reservation_id,
+        reserve_date = query.reserve_date,
+        customer_id = query.customer_id,
+        grill_id = query.grill_id
+    )
+    flash('You have successfully cancelled your reservation')
+    return redirect ('/account')
+
 
 
 if __name__ == '__main__':
