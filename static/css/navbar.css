@@ -12,6 +12,10 @@ li {
  letter-spacing: 2px;
 
 }
+form.form_style {
+text-align: center;
+margin-top: 100px;
+}
 
 a {
  color: #6F6F6F ;

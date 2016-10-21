@@ -1,31 +1,3 @@
-# from flask import Flask, render_template, redirect, request, session, flash
-# import pg
-#
-# app = Flask('app')
-#
-# @app.route('/')
-# def login():
-#
-#     return render_template(
-#     'grillber.html'
-#     )
-#
-# @app.route('/submit_reservation', methods=['POST'])
-# def submit_reservation():
-#     shift = request.form.get('shift')
-#     date = request.form.get('date')
-#     size = request.form.get('size')
-#
-#     print "Shift : %s, Date: %s, Size: %s" % (shift,date,size)
-#     return redirect('/')
-#
-#
-#
-#
-#
-# if __name__ == '__main__':
-
-#     app.run(debug=True)
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 from flask import Flask, render_template, redirect, request, session, flash
@@ -133,7 +105,7 @@ def date_submit():
         date = date
         )
     else:
-        print "All grills are booked on this day."
+        flash ("All grills are booked on this day.")
     return redirect('/')
 
 
@@ -144,22 +116,27 @@ def reserve_grill():
     )
 
 @app.route('/submit_reservation',methods =['POST'])
-def reserve_confirmation():
-    grill_id = request.form.get('id')
-    email = session['email']
-    cust_id = session['id']
-    date = request.form.get('date')
-    size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
-    db.insert('reservation',
-    reserve_date = date,
-    grill_id = grill_id,
-    customer_id = cust_id)
 
-    return render_template(
-    'confirmation.html',
-    date = date,
-    size = size
-    )
+def reserve_confirmation():
+    if ('id' in session):
+        grill_id = request.form.get('id')
+        email = session['email']
+        cust_id = session['id']
+        date = request.form.get('date')
+        size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
+        db.insert('reservation',
+        reserve_date = date,
+        grill_id = grill_id,
+        customer_id = cust_id)
+        return render_template(
+        'confirmation.html',
+        date = date,
+        size = size
+        )
+    else:
+        flash('Please login to reserve.')
+        return render_template(
+        'login.html')
 
 @app.route('/account')
 def account():
@@ -194,6 +171,7 @@ def cancel_submit():
     )
     flash('You have successfully cancelled your reservation')
     return redirect ('/account')
+
 
 @app.route('/submit_rental', methods=['POST'])
 def submit_rental():

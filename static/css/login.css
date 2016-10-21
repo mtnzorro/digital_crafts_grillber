@@ -6,10 +6,12 @@ body form .form_style {
 margin-top: 100px;
 }
 
-div.container.jumbotron.col-md-offset-4.col-md-4 {
-margin-top: 100px;
+form {
+  text-align: center;
 }
-
+table {
+  color: white;
+}
 body ul li a .navy_font{
  font-family: 'Lato', sans-serif;
 }
