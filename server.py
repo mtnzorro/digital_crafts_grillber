@@ -153,18 +153,19 @@ def account():
 def cancel_submit():
     reservation_id = request.form.get('cancel')
     print reservation_id
-    query = db.query("select * from reservation where reservation.id = $1",reservation_id).namedresult()[0]
-    reserve_date = query.reserve_date
-    customer_id = query.customer_id
-    grill_id = query.grill_id
-    print reserve_date
-    print customer_id
-    print grill_id
+    # query = db.query("select * from reservation where reservation.id = $1",reservation_id).namedresult()[0]
+
+    # reserve_date = query.reserve_date
+    # customer_id = query.customer_id
+    # grill_id = query.grill_id
+    # print reserve_date
+    # print customer_id
+    # print grill_id
     db.delete('reservation',
         id = reservation_id,
-        reserve_date = query.reserve_date,
-        customer_id = query.customer_id,
-        grill_id = query.grill_id
+        # reserve_date = query.reserve_date,
+        # customer_id = query.customer_id,
+        # grill_id = query.grill_id
     )
     flash('You have successfully cancelled your reservation')
     return redirect ('/account')
@@ -174,10 +175,20 @@ def cancel_submit():
 def submit_rental():
     status = request.form.get('rent')
     grill_id = request.form.get('grill_id')
-    db.update('grill',{
-        'id': grill_id,
-        'is_rented': status
-    })
+    rid = request.form.get('rid')
+    print rid
+
+    if (not status):
+        print "Reached to print delete"
+        db.delete('reservation',
+        id = rid,
+        )
+
+    else:
+        db.update('grill',{
+            'id': grill_id,
+            'is_rented': status
+        })
     return redirect('/account')
 
 if __name__ == '__main__':
