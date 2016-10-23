@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <form action="/submit_reservation" method="post">
+    <article>
+      <h3>The Bill</h3>
+      <h3>{{query.size}}</h3>
+      <h3>{{date}}</h3>
+      <h3>{{email}}</h3>
+      <h3>{{query.price/100}}</h3>
+      <input type="hidden" name="g_id" value="{{grill_id}}">
+      <input type="hidden" name="email" value="{{email}}">
+      <input type="hidden" name="cust_id" value="{{cust_id}}">
+      <input type="hidden" name="date" value="{{date}}">
+      <input type="hidden" name="size" value="{{query.size}}">
+      <input type="hidden" name="price" value="{{query.price}}">
+    </article>
+    <h3><script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ key }}"
+            data-description="Rental Charge"
+            data-amount="{{query.price}}"
+            data-locale="auto"></script></h3>
+
+  </form>
+{% endblock %}

@@ -2,6 +2,18 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 from flask import Flask, render_template, redirect, request, session, flash
 import pg, os
+import stripe
+
+
+# Stripe Keys
+
+stripe_keys = {
+  'secret_key': os.environ['SECRET_KEY'],
+  'publishable_key': os.environ['PUBLISHABLE_KEY']
+}
+
+stripe.api_key = stripe_keys['secret_key']
+
 
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask('Wiki', template_folder=tmp_dir)
@@ -20,7 +32,7 @@ app.secret_key = 'keyur12345'
 @app.route('/')
 def login():
     return render_template(
-    'grillber.html'
+    'grillber.html',
     )
 
 @app.route('/reserve_date')
@@ -58,7 +70,7 @@ def submit_signup():
     street = request.form.get('street')
     zip_code = request.form.get('zip_code')
     phone = request.form.get('phone')
-    name = request.form.get('name')
+    name = request.form.get('name').upper()
     db.insert('customer',
     email = email,
     password = password,
@@ -92,7 +104,7 @@ def submit_login():
 @app.route('/submit_date', methods=['POST'])
 def date_submit():
     date = request.form.get('date')
-    query = db.query("Select distinct on (size.size) size.size, grill.id, size.reserve_btn_display from grill inner join size on size.id = grill.size_id and grill.id not in"
+    query = db.query("Select distinct on (size.size) size.size, grill.id as g_id, size.reserve_btn_display from grill inner join size on size.id = grill.size_id and grill.id not in"
 "(SELECT grill.id from grill left outer join reservation on grill.id = reservation.grill_id where reservation.reserve_date = $1"
 ")",date).namedresult()
     if len(query)>0:
@@ -112,28 +124,59 @@ def reserve_grill():
     'reserve_grill.html'
     )
 
-@app.route('/submit_reservation',methods =['POST'])
-
-def reserve_confirmation():
-    if ('id' in session):
+@app.route('/charge', methods=['POST'])
+def charge():
+    if('id' in session):
         grill_id = request.form.get('id')
         email = session['email']
         cust_id = session['id']
         date = request.form.get('date')
-        size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
-        db.insert('reservation',
-        reserve_date = date,
-        grill_id = grill_id,
-        customer_id = cust_id)
+        query = db.query("select size.size,size.price from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0]
         return render_template(
-        'confirmation.html',
+        'charge.html',
+        key=stripe_keys['publishable_key'],
+        grill_id = grill_id,
+        email = email,
+        cust_id = cust_id,
         date = date,
-        size = size
+        query = query
         )
     else:
         flash('Please login to reserve.')
-        return render_template(
-        'login.html')
+
+
+@app.route('/submit_reservation',methods =['POST'])
+
+def reserve_confirmation():
+    grill_id = request.form.get('g_id')
+    price = request.form.get('price')
+    size = request.form.get('size')
+    email = session['email']
+    cust_id = session['id']
+    print session['id']
+    print grill_id
+    date = request.form.get('date')
+    customer = stripe.Customer.create(
+        email=email,
+        card=request.form['stripeToken']
+        )
+        # Only turn on if you want to charge an actual customer.
+    # charge = stripe.Charge.create(
+    #     customer=cust_id,
+    #     amount=price,
+    #     currency='usd',
+    #     description='Rental Charge'
+    # )
+    # size = db.query("select size from size inner join grill on size.id = grill.size_id where grill.id=$1",grill_id).namedresult()[0].size
+    db.insert('reservation',
+    reserve_date = date,
+    grill_id = grill_id,
+    customer_id = cust_id)
+    return render_template(
+    'confirmation.html',
+    date = date,
+    size = size
+    )
 
 @app.route('/account')
 def account():
