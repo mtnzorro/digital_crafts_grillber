@@ -143,6 +143,7 @@ def charge():
         )
     else:
         flash('Please login to reserve.')
+        return redirect('/login')
 
 
 @app.route('/submit_reservation',methods =['POST'])
