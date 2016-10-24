@@ -3,11 +3,43 @@
 {% block body %}
   <form action="/submit_reservation" method="POST">
     <article>
-      <h3>The Bill</h3>
+      <!-- <h3>The Bill</h3>
       <h3>{{query.size}}</h3>
       <h3>{{date}}</h3>
       <h3>{{email}}</h3>
-      <h3>{{query.price/100}}</h3>
+      <h3>{{query.price/100}}</h3> -->
+      <div class="container">
+
+
+      <table class="table table-bordered">
+        <tr>
+          <th>Invoice</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Grill Size</td>
+          <td>{{query.size}}</td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>{{date}}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{email}}</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>$ {{query.price}}</td>
+        </tr>
+
+      </table>
+      </div>
+
+
+
+
+
       <input type="hidden" name="g_id" value="{{grill_id}}">
       <input type="hidden" name="email" value="{{email}}">
       <input type="hidden" name="cust_id" value="{{cust_id}}">

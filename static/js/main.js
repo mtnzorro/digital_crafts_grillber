@@ -85,9 +85,12 @@
 					})
 					.each(function() {
 
-						var	$this = $(this),
-							id = $this.attr('href'),
-							$section = $(id);
+						var	$this = $(this);
+						var id = $this.attr('href');
+						if (id[0] !== '#') {
+							return;
+						}
+						var $section = $(id);
 
 						// No section for this link? Bail.
 							if ($section.length < 1)
@@ -173,7 +176,6 @@
 						x;
 
 					// Assign image.
-						$image.css('background-image', 'url(' + $img.attr('src') + ')');
 
 					// Set background position.
 						if (x = $img.data('position'))
