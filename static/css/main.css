@@ -21,6 +21,10 @@
 		display: block;
 	}
 
+	span {
+		font-size: .70em
+	}
+
 	body {
 		line-height: 1;
 	}

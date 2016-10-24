@@ -16,7 +16,7 @@ stripe.api_key = stripe_keys['secret_key']
 
 
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-app = Flask('Wiki', template_folder=tmp_dir)
+app = Flask('grillber', template_folder=tmp_dir)
 
 db = pg.DB(
     dbname=os.environ.get('PG_DBNAME'),
@@ -90,15 +90,20 @@ def submit_login():
 
     if len(query)>0:
         user = query[0]
-        if user.password == password:
+        if (user.password == password and user.email == email):
             session['email'] = user.email
             session['name'] = user.name
             session['id'] = user.id
-            print session['id']
-            print session['name']
+
+            print user.email
+            print user.password
+
             return redirect('/')
-    else:
-        return redirect('/login')
+
+    flash ("Please enter the correct email & password.")
+    return redirect('/login')
+
+
 
 
 @app.route('/submit_date', methods=['POST'])
@@ -152,6 +157,7 @@ def reserve_confirmation():
     grill_id = request.form.get('g_id')
     price = request.form.get('price')
     size = request.form.get('size')
+    remarks = request.form.get('remarks')
     email = session['email']
     cust_id = session['id']
     print session['id']
@@ -172,7 +178,10 @@ def reserve_confirmation():
     db.insert('reservation',
     reserve_date = date,
     grill_id = grill_id,
-    customer_id = cust_id)
+    customer_id = cust_id,
+    is_cancelled = False,
+    is_returned = False
+    )
     return render_template(
     'confirmation.html',
     date = date,
@@ -181,8 +190,8 @@ def reserve_confirmation():
 
 @app.route('/account')
 def account():
-    query = db.query("select reservation.id as rid, customer.*, customer_id,reservation.reserve_date, size.size, grill.id as g_id, grill.is_rented, grill.unit_name from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id inner join customer on reservation.customer_id = customer.id order by reservation.reserve_date").namedresult()
-    if session['name'] == "owner":
+    query = db.query("select reservation.remarks,reservation.id as rid, customer.*, customer_id,reservation.reserve_date, size.size, grill.id as g_id, grill.is_rented, grill.unit_name from reservation inner join grill on reservation.grill_id = grill.id inner join size on grill.size_id = size.id inner join customer on reservation.customer_id = customer.id where reservation.is_cancelled = False and reservation.is_returned = False and reservation.reserve_date > now()::date -1 order by reservation.reserve_date").namedresult()
+    if session['name'] == "OWNER" or session['name'] == "owner":
         return render_template(
         'owner_account.html',
         query= query
@@ -205,8 +214,12 @@ def cancel_submit():
     # print reserve_date
     # print customer_id
     # print grill_id
-    db.delete('reservation',
-        id = reservation_id,
+    db.update('reservation',{
+    'id' : reservation_id,
+    'is_cancelled' : True
+    }
+
+
         # reserve_date = query.reserve_date,
         # customer_id = query.customer_id,
         # grill_id = query.grill_id
@@ -217,22 +230,35 @@ def cancel_submit():
 
 @app.route('/submit_rental', methods=['POST'])
 def submit_rental():
-    status = request.form.get('rent')
+    is_rented = request.form.get('rent')
+    remarks = request.form.get('remarks')
     grill_id = request.form.get('grill_id')
     rid = request.form.get('rid')
-    print rid
+    rent_date = request.form.get('rent_date')
 
-    if (not status):
-        print "Reached to print delete"
-        db.delete('reservation',
-        id = rid,
-        )
 
-    else:
+    if is_rented == "False":
+        db.update('reservation',{
+        'id' : rid,
+        'remarks' : remarks,
+        'is_returned' : False,
+        'is_cancelled' : False
+        })
         db.update('grill',{
             'id': grill_id,
-            'is_rented': status
+            'is_rented': True
         })
+    elif is_rented == "True":
+        db.update('grill',{
+            'id': grill_id,
+            'is_rented': False
+        })
+        db.update('reservation',{
+        'id' : rid,
+        'remarks' : remarks,
+        'is_returned' : True
+        })
+
     return redirect('/account')
 
 if __name__ == '__main__':

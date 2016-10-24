@@ -28,9 +28,26 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
+
+  var dateToday = new Date();
+   var dates = $("#datepicker").datepicker({
+       defaultDate: "+1w",
+       changeMonth: true,
+       numberOfMonths: 1,
+       minDate: dateToday,
+       onSelect: function(selectedDate) {
+           var option = this.id == "datepicker" ? "minDate" : "maxDate",
+               instance = $(this).data("datepicker"),
+               date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+           dates.not(this).datepicker("option", option, date);
+       }
+   });
+
+
   </script>
 
 {% endblock %}
