@@ -88,7 +88,7 @@ Dominic Zenon
 Autumn Coleman
 
 ###Screenshots
-!grillber1.png
-!grillber3.png
-!grillber2.png
+![](grillber1.png)
+![](grillber3.png)
+![](grillber2.png)
 
