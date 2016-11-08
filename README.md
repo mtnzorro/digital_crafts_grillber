@@ -68,7 +68,7 @@ We wanted to create Grillber to be a basic, yet fully functional grill rental ap
 	•	Calendar and grill buttons - We used a jQuery UI calendar to allow our customers to select a date.  The date is passed to the database as a query which returns available grill sizes that populate on the website as buttons.  
 
 
-#####Stretch Goals 
+###Stretch Goals 
 We were able to meet one of our stretch goals: Adding Stripe as a payment method.  On further iterations of Grillber, we would implement the following:
 	•	Option to buy add-on packages - These packages would include items such as food, tents, turf pads, and chairs to supplement customer events like tailgating or parties. 
 	•	Delivery - The reservation system would handle scheduling for the delivery of grills with the possibility of scheduling grill pick-ups as well.  
@@ -80,7 +80,7 @@ We were able to meet one of our stretch goals: Adding Stripe as a payment method
 	•	Additional styling - Create a fully functional, one page website where the logins and rentals are handled on the main page.
 
 
-Contributors 
+###Contributors 
 
 Jason Campbell
 Keyur Patel 
