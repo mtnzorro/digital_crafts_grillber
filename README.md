@@ -10,7 +10,7 @@ www.grillber.com
 ####MVP 
 ####Stretch Goals
 ####Contributors 
-####Example Code
+####Screenshots
 
 ###Overview 
 Grillber is a grill rental service offering a selection of Big Green Eggs available for daily rental.  Customers are able to select from three models, depending on their needs, by choosing a date and size based on available inventory.  Payment is accepted via Stripe API.  Customer can manage their reservations through a customer account portal.  Likewise, the owner can manage all customer reservations through an owner portal.
@@ -86,3 +86,9 @@ Jason Campbell
 Keyur Patel 
 Dominic Zenon 
 Autumn Coleman
+
+###Screenshots
+!grillber1.png
+!grillber3.png
+!grillber2.png
+
